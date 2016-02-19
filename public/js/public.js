@@ -1,0 +1,2 @@
+/* public js by daimingru */
+$('')

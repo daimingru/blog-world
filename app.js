@@ -3,7 +3,7 @@ var port = process.env.PORT || 3000
 var app = express()
 var title = '博客视界-blog-world';//博客标题title
 var rootpath = __dirname;//根目录
-express.static(path.join(__dirname, 'public'))
+app.use(express.static(__dirname + '/public'));
 app.set('views','./views')
 app.set('view engine','ejs')//ejs模板
 

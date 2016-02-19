@@ -1,0 +1,6 @@
+/* 首页导航移动CSS */
+@keyframes leftgo
+{
+from {left:0;}
+to {left:50px;color:#FFBDE1;}
+}
