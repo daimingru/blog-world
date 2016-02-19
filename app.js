@@ -18,10 +18,29 @@ app.get('/index',function(req,res){
 	indexaction(req,res);
 })
 
-function indexaction(req,res){
+app.post('/index',function(req,res){
 	res.render('index',{
+	})
+})
+
+//list page
+app.post('/list',function(req,res){
+	listaction(req,res);
+})
+
+app.get('/list',function(req,res){
+	listaction(req,res);
+})
+
+
+function indexaction(req,res){
+	res.render('layout',{
 		title:title,
-		rootpath:rootpath
+		flag:'index',
 	})
 }
 
+function listaction(req,res){
+	res.render('list',{
+	})
+}

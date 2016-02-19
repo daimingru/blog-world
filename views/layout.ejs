@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><%=title%></title>
+  <meta name="keywords" content="博客视界-blog-world,博客世界,博客,视界,世界,个人博客,技术分享,博客分享" />
+  <meta name="description" content="博客视界-blog-world致力于打造简介，大方的博客空间，在这里可以随时记录生活琐事，技术心得等等。" />
+  <link rel="stylesheet" type="text/css" href="css/base.css">
+  <link rel="stylesheet" type="text/css" href="css/basecss3.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/prefixfree.min.js"></script>
+  <script type="text/javascript" src="js/public.js"></script>
+</head>
+<body>
+  
+  <% include left.ejs %>
+  <div class="right">
+    <div class="loading">
+      <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
+    </div>
+    <div class="rightcont">
+    <% if(flag == 'list'){ %>
+       <% include list.ejs %>
+      <% }else{ %>
+        <% include index.ejs %>
+      <% } %>
+    </div>
+  </div>
+  <script type="text/javascript">
+   var menuli = $('.menu').find('li');
+   var blog_title = $('.blog_title');
+  $(function(){
+    //首页左侧menu
+    menuli.hover(function(){
+      $(this).find('span').addClass('leftgo');
+    },function(){
+      $(this).find('span').removeClass('leftgo');
+    })
+
+    menuli.click(function(){
+      $(this).addClass('menu_select').siblings().removeClass('menu_select');
+      SelectMenuPage(this);
+    })
+    blog_title.on('mouseover mouseout',actionAnimate);
+  })
+  </script>
+</body>
+</html>

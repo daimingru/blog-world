@@ -4,3 +4,9 @@
 from {left:0;}
 to {left:50px;color:#FFBDE1;}
 }
+/* 首页右侧title CSS */
+@keyframes titlego
+{
+from {padding-left: 0;}
+to {color:#000;padding-left: 10%;}
+}
