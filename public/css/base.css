@@ -902,3 +902,13 @@ table { border-collapse:collapse; border-spacing:0; }
     -webkit-transform: scaleY(1.0);
   }
 }
+
+/* active css */
+.active_title{color: #6A76D0;font-size: 22px;display: block;margin-bottom: 20px;padding: 5px 0;text-align: center;}
+.active_time{text-align: center;padding-bottom: 20px;border-bottom:1px solid #DEDEDE;margin-bottom: 35px;}
+.blogcont .active_time span{color: #A2A2A2;font-size: 14px;margin-top: 0;}
+.blogcont .active_time span:first-child{margin-right:30px;}
+.articlebox{position:absolute;width: 77%;left: 100%;background: #EFFFF1;z-index: 998;border: 6px solid #D8D8D8;}
+.articlego{animation:articlego .6s ease forwards;}
+.articleback{animation:articleback .6s ease forwards;}
+.blogcont li.history {border-bottom: none;margin-top: 0;}

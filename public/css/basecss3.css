@@ -10,3 +10,15 @@ to {left:50px;color:#FFBDE1;}
 from {padding-left: 0;}
 to {color:#000;padding-left: 10%;}
 }
+/* 文章移动 CSS */
+@keyframes articlego
+{
+from {left:100%;}
+to {left:23%;}
+}
+
+@keyframes articleback
+{
+from {left:23%;}
+to {left:100%;}
+}

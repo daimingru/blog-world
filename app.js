@@ -6,8 +6,18 @@ var rootpath = __dirname;//根目录
 app.use(express.static(__dirname + '/public'));
 app.set('views','./views')
 app.set('view engine','ejs')//ejs模板
-
 app.listen(port)
+
+//链接数据库
+var mysql = require('mysql');
+var conn = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database:'blog-world',
+    port: 3306
+});
+conn.connect();
 
 //index page
 app.get('/',function(req,res){
@@ -23,6 +33,13 @@ app.post('/index',function(req,res){
 	})
 })
 
+app.post('/article',function(req,res){
+	res.render('article',{
+		title:title,
+		flag:'article'
+	})
+})
+
 //list page
 app.post('/list',function(req,res){
 	listaction(req,res);
@@ -34,13 +51,24 @@ app.get('/list',function(req,res){
 
 
 function indexaction(req,res){
-	res.render('layout',{
-		title:title,
-		flag:'index',
-	})
+	conn.query('SELECT * FROM article', function(err, rows, fields) {
+    if (err) throw err;
+      var article = rows[0].title;
+      conn.query('SELECT name FROM user', function(err, rows, fields) {
+      if (err) throw err;
+        res.render('layout',{
+        	article:article,
+	    	name:rows[0].name,
+	    	title:title,
+	    	flag:'index'
+	    })
+      });
+    });
+	
 }
 
 function listaction(req,res){
 	res.render('list',{
 	})
 }
+
