@@ -1,25 +1,13 @@
     <div class="blogcont">
       <ul>
+        <% for(var i=0;i<article.length;i++){ %>
         <li class="list">
-          <a class="blog_title" href="javascript:void(0);" data-href="/article" onclick="ArticleMenuPage(this)">这是我的第一篇博客</a>
-          <p class="brief">这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客...</p>
+          <a class="blog_title" href="javascript:void(0);" data-href="/article" onclick="ArticleMenuPage(this,<%=article[i].id%>)"><%=article[i].title%></a>
+          <p class="brief"><%=article[i].article.substr(0,200)%>......</p>
           <div style="overflow:hidden;">
-            <span style="float:left;">作者:&nbsp;&nbsp;戴明儒</span><span style="float:right;">2016-1-21</span>
+            <span style="float:left;">作者:&nbsp;&nbsp;<%=article[i].auther%></span><span style="float:right;"><%=article[i].createtime%></span>
           </div>
         </li>
-        <li class="list">
-          <a class="blog_title" href="javascript:void(0);" data-href="/article" onclick="ArticleMenuPage(this)">这是我的第二篇博客</a>
-          <p class="brief">这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客...</p>
-          <div style="overflow:hidden;">
-            <span style="float:left;">作者:&nbsp;&nbsp;戴明儒</span><span style="float:right;">2016-1-21</span>
-          </div>
-        </li>
-        <li class="list">
-          <a class="blog_title" href="javascript:void(0);" data-href="/article" onclick="ArticleMenuPage(this)">这是我的第三篇博客</a>
-          <p class="brief">这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客这是我的第一篇博客...</p>
-          <div style="overflow:hidden;">
-            <span style="float:left;">作者:&nbsp;&nbsp;戴明儒</span><span style="float:right;">2016-1-21</span>
-          </div>
-        </li>
+        <% } %>
       </ul>
     </div>

@@ -25,20 +25,22 @@ function SelectMenuPage(obg){
 }
 
 //详情页页面跳转js
-function ArticleMenuPage(obg){
+var scrollTop;
+function ArticleMenuPage(obg,id){
   $('.articlebox').css('display','block');
   $('.articlebox').removeClass('articlego');
   $('.articlebox').removeClass('articleback');
   var path = $(obg).attr('data-href');
+  scrollTop=document.body.scrollTop;
   $.ajax({
 			type: 'post',
+            data:{id:id},
 			dataType: "html",
 			url: path,
 			beforeSend:function(){
 				$('.loading').css('display','block');
 			},
 			success: function (data) {
-				    var scrollTop=document.body.scrollTop;
 					$('.articlebox').html(data);
 					$('.articlebox').css('top',scrollTop);
 					$('.articlebox').addClass('articlego');
@@ -74,4 +76,7 @@ function actionAnimate(){
 //文章关闭效果
 function CloseArticle(){
       $('.articlebox').addClass('articleback');
+      document.body.scrollTop = scrollTop;
 }
+
+//文章
