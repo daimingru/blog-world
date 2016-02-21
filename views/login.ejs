@@ -6,11 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="博客视界-blog-world,博客世界,博客,视界,世界,个人博客,技术分享,博客分享" />
 <link rel="stylesheet" type="text/css" href="css/login.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
 </head>
 <body>
  <!--SIGN UP-->
  <h1>博客视界后台登录</h1>
+ <div class="loading">
+      <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
+</div>
 <div class="login-form">
 	<div class="close"> </div>
 		<div class="head-info">
@@ -19,9 +29,9 @@
 	    <div class="avtar">
 		    <img src="images/login/avtar.png" />
 	    </div>
-			<input type="text" class="text" placeholder="Username" >
+			<input type="text" class="text" id="username" placeholder="Email" >
 			<div class="key">
-			    <input type="password" placeholder="Password" >
+			    <input type="password" id="password" placeholder="Password" >
 			</div>
 	<div class="signin">
 		<input type="submit" value="登录" onclick="checkformgo();" >

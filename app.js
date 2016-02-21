@@ -63,6 +63,19 @@ app.get('/login',function(req,res){
     })
 })
 
+app.post('/login',function(req,res){
+    conn.query('select password from user where email = "' + req.body.username + '" ',function(err,rows,fields){
+        if(err){
+            res.send({success:'错了1'});
+        }
+        if(rows[0].password == req.body.password){
+           res.send({success:true});
+        }
+           res.send({success:false});
+    });
+    
+})
+
 console.log(moment("20111031").format('YYYYMMDD'));
 function indexaction(req,res){
     if(arguments[2]){
@@ -98,3 +111,7 @@ function listaction(req,res){
     });
 }
 
+//错误信息
+function showError(err){
+    alert(err);
+}
