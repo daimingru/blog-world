@@ -11,14 +11,8 @@ app.set('view engine','ejs')//ejs模板
 app.listen(port)
 
 //链接数据库
-var mysql = require('mysql');
-var conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database:'blog-world',
-    port: 3306
-});
+var database = require('./config');
+var conn = database.conn;
 conn.connect();
 
 app.use(bodyParser.urlencoded({ extended: false }));//用于post请求 
@@ -36,18 +30,6 @@ app.post('/index',function(req,res){
 	indexaction(req,res,1);
 })
 
-app.post('/article',function(req,res){
-    conn.query('SELECT * FROM article order by id desc limit 0,5', function(err, rows, fields) {
-    if (err) throw err;
-      var id = req.body.id - 1;
-      var article = rows.reverse();
-        res.render('article',{
-            indexa:id,
-            article:article
-        })
-    });
-})
-
 //list page
 app.post('/list',function(req,res){
 	listaction(req,res);
@@ -63,20 +45,40 @@ app.get('/login',function(req,res){
     })
 })
 
+
+app.post('/article',function(req,res){
+    conn.query('SELECT * FROM article order by id desc limit 0,5', function(err, rows, fields) {
+    if (err) throw err;
+      var id = req.body.id - 1;
+      // 遍历数组格式化时间
+      rows = forTimearry(rows);
+      var article = rows.reverse();
+        res.render('article',{
+            indexa:id,
+            article:article
+        })
+    });
+})
+
+
 app.post('/login',function(req,res){
     conn.query('select password from user where email = "' + req.body.username + '" ',function(err,rows,fields){
         if(err){
             res.send({success:'错了1'});
         }
-        if(rows[0].password == req.body.password){
-           res.send({success:true});
+        if(rows.length){
+           if(rows[0].password == req.body.password){
+              res.send({success:true});
+           }else{
+              res.send({success:false});
+           }
+        }else{
+            res.send({success:false});
         }
-           res.send({success:false});
     });
     
 })
 
-console.log(moment("20111031").format('YYYYMMDD'));
 function indexaction(req,res){
     if(arguments[2]){
         templute = 'index';
@@ -85,7 +87,7 @@ function indexaction(req,res){
     }
 	conn.query('SELECT * FROM article order by id desc limit 0,5', function(err, rows, fields) {
     if (err) throw err;
-      var article = rows;
+      var article = forTimearry(rows);
       conn.query('SELECT name FROM user', function(err, rows, fields) {
       if (err) throw err;
         res.render(templute,{
@@ -115,3 +117,12 @@ function listaction(req,res){
 function showError(err){
     alert(err);
 }
+
+//遍历数组时间 
+function forTimearry(rows){
+    for(var i = 0;i<rows.length;i++){
+        rows[i].createtime = moment(rows[i].createtime).format("YYYY-MM-DD");
+    }
+    return rows;
+}
+
