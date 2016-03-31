@@ -3,7 +3,8 @@ var mysql = require('mysql');
 module.exports.conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '123456',
+    password: '',
     database:'blog-world',
     port: 3306
 });
+

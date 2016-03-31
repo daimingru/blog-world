@@ -28,29 +28,22 @@
       </div>
     </div>
     <div class="rightcont">
-    <% if(flag == 'list'){ %>
-       <% include list.ejs %>
+      <% if(flag == 'list'){ %>
+        <% include list.ejs %>
       <% }else{ %>
         <% include index.ejs %>
       <% } %>
     </div>
   </div>
   <script type="text/javascript">
-   var menuli = $('.menu').find('li');
-   var blog_title = $('.blog_title');
-  $(function(){
+   $(function(){
     //首页左侧menu
-    menuli.hover(function(){
+    $('.menu').find('li').hover(function(){
       $(this).find('span').addClass('leftgo');
     },function(){
       $(this).find('span').removeClass('leftgo');
     })
 
-    menuli.click(function(){
-      $(this).addClass('menu_select').siblings().removeClass('menu_select');
-      SelectMenuPage(this);
-    })
-    blog_title.on('mouseover mouseout',actionAnimate);
   })
   </script>
 </body>
