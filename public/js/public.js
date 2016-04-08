@@ -9,9 +9,4 @@ function actionAnimate(){
       }
 }
 
-//文章关闭效果
-function CloseArticle(){
-      $('.articlebox').addClass('articleback');
-      document.body.scrollTop = scrollTop;
-}
 

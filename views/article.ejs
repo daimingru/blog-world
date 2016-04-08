@@ -1,13 +1,13 @@
     <div class="blogcont">
       <ul>
         <li>
-          <h3 class="active_title"><%=article[indexa].title%></h3>
-          <p class="active_time"><span>作者:&nbsp;&nbsp;<%=article[indexa].auther%></span><span><%=article[indexa].createtime%></span></p>
+          <h3 class="active_title"><%=article[0].title%></h3>
+          <p class="active_time"><span>作者:&nbsp;&nbsp;<%=article[0].auther%></span><span><%=article[0].createtime%></span></p>
           <img src="images/test.jpg" width="80%" class="blogimg">
-          <p class="brief"><%=article[indexa].article%></p>
+          <p class="brief"><%=article[0].article%></p>
         </li>
         <li class="history" onclick="CloseArticle();">
-          <span>返回列表</span>
+          <a href="/list">返回列表</a>
         </li>
       </ul>
     </div>

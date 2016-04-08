@@ -15,8 +15,10 @@ function checkformgo(){
             success: function (data) {
                   if(data.success){
                     alert('恭喜！登录成功！');
+                    window.location.href = "/admin";
                   }else{
                     alert('邮箱或密码错误，请重新输入！');
+                    return;
                   }
                   $('.loading').css('display','none');
             },error:function(XMLHttpRequest, textStatus, errorThrown){

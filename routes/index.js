@@ -26,6 +26,23 @@ module.exports.routes = function(app,express){
   app.get('/login',function(req,res){
     res.render('login',{});
   })
+  
+  app.get('/article', function(req, res){  
+    var article_id = req.query.id;
+    conn.query('SELECT * FROM article where id=' + article_id, function(err, rows, fields) {
+    if (err) throw err;
+      var article = forTimearry(rows);
+      conn.query('SELECT name FROM user', function(err, rows, fields) {
+      if (err) throw err;
+        res.render('layout',{
+          article:article,
+          name:rows[0].name,
+          title:rows[0].title,
+          flag:'article'
+        })
+      });
+    });
+  });  
 
   //post login
   app.post('/login',function(req,res){
@@ -43,7 +60,32 @@ module.exports.routes = function(app,express){
             res.send({success:false});
         }
     });
+  });
+
+  //admin 
+  app.get('/admin',function(req,res){
+    conn.query('select name from user',function(err,rows,fields){
+      if(err) throw err;
+      res.render('admin/layout',{
+        name:rows[0].name,
+        title:'博客视界-后台管理系统',
+        flag:'index'
+      })
+    })
   })
+
+  //admin 
+  app.get('/write',function(req,res){
+    conn.query('select name from user',function(err,rows,fields){
+      if(err) throw err;
+      res.render('admin/layout',{
+        name:rows[0].name,
+        title:'博客视界-后台管理系统',
+        flag:'write'
+      })
+    })
+  })
+
 };  
 
 
