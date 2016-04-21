@@ -1,3 +1,15 @@
+<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"> </script>
+<div class="loading">
+      <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
+</div>
 <div class="write">
   <div class="formbox">
     <form name="form" id="form" action="" method="post">
@@ -11,16 +23,60 @@
         <li>
             <div class="input-group">
               <span class="input-group-addon" id="basic-addon1">作者：</span>
-              <input type="text" class="form-control inpput1" aria-describedby="basic-addon1" value="">
+              <input type="text" class="form-control inpput1" aria-describedby="basic-addon1" value="戴明儒" disabled="">
             </div>
         </li>
         <li>
             <div class="input-group">
               <span class="input-group-addon" id="basic-addon1">内容：</span>
               <div class="textal">
+                <script id="editor" type="text/plain" style="width:1000px;height:500px;"></script>
+                <script>
+                    var ue = UE.getEditor('editor');
+                    ue.ready(function() {
+                      loading.Close();
+                    });
+                </script>
               </div>
             </div>
         </li>
+        <li>
+          <botton type="botton" class="textup" name="submit" onclick="uptext();" />发布文章</botton>
+        </li>
+        <script type="text/javascript">
+              //这段要放在文本编辑器的实例化之后
+              var title = $('.inpput');
+              function uptext(){
+                if(title.val() == '' || ue.getContent() == ''){
+                  alert('请填写完成!');
+                  return;
+                }
+                if (!UE.getEditor('editor').hasContents()){
+                alert('请先填写内容!');
+                }else{
+                    loading.Start();
+                    $.ajax({
+                      url:'/createarticle',
+                      type: "POST",
+                      data:{"content":ue.getContent(),"writer":$('.inpput1').val(),"title":$('.inpput').val()},
+                      dataType:"json",
+                      success: function(msg){
+                        if(msg.success){
+                          alert('发表成功!');
+                        }else{
+                          alert('发表失败,请联系管理员!');
+                        }
+                      },
+                      error:function(err){
+                        alert(err);
+                      },
+                      complete:function(msg){
+                        loading.Close();
+                      }
+                    })
+                }
+              }
+            </script>
       </ul>
     </form>
   </div>

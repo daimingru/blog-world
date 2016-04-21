@@ -17,9 +17,8 @@
 <body>
   <% include left.ejs %>
   <div class="right">
-    <div class="loading">
+    <div class="loading" style="display:block;">
       <div class="spinner">
-      
         <div class="rect1"></div>
         <div class="rect2"></div>
         <div class="rect3"></div>
@@ -32,6 +31,8 @@
         <% include index.ejs %>
       <% }else if(flag == 'write'){ %>
         <% include write.ejs %>
+      <% }else{ %>
+        <% include list.ejs %>
       <% } %>
     </div>
   </div>

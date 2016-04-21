@@ -8,13 +8,13 @@
     </div>
     <div>
       <ul class="menu">
-        <li class="menu_select">
+        <li<% if(flag == 'index'){ %> class="menu_select"<% } %>>
           <a href="/">
             <i class="menu_icon glyphicon glyphicon-home"></i>
             <span>Home</span>
           </a>
         </li>
-        <li>
+        <li<% if(flag == 'list'){ %> class="menu_select"<% } %>>
           <a href="/list">
             <i class="menu_icon glyphicon glyphicon-pencil"></i>
             <span>Bloglist</span>

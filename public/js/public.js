@@ -9,4 +9,12 @@ function actionAnimate(){
       }
 }
 
+var loading = {
+    Start:function(){
+        $('.loading').css('display','block');
+    },
+    Close:function(){
+        $('.loading').css('display','none');
+    }
+}
 

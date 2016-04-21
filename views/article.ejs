@@ -1,10 +1,14 @@
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<link type="text/css" rel="stylesheet" href="css/shCoreDefault.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
     <div class="blogcont">
       <ul>
         <li>
           <h3 class="active_title"><%=article[0].title%></h3>
           <p class="active_time"><span>作者:&nbsp;&nbsp;<%=article[0].auther%></span><span><%=article[0].createtime%></span></p>
           <img src="images/test.jpg" width="80%" class="blogimg">
-          <p class="brief"><%=article[0].article%></p>
+          <div class="brief"><%-article[0].article%></div>
         </li>
         <li class="history" onclick="CloseArticle();">
           <a href="/list">返回列表</a>
