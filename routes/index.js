@@ -83,13 +83,13 @@ module.exports.routes = function(app,express){
 
   //post login
   app.post('/login',function(req,res){
-    conn.query('select password from user where email = "' + req.body.username + '" ',function(err,rows,fields){
+    conn.query('select password,id from user where email = "' + req.body.username + '" ',function(err,rows,fields){
         if(err){
             res.send({success:'错了'});
         }
         if(rows.length){
            if(rows[0].password == req.body.password){
-              res.cookie('isVisit', 'admin', {maxAge: 60 * 10000});
+              res.cookie('userid', rows[0].id, {maxAge: 60 * 10000});
               res.send({success:true});
            }else{
               res.send({success:false});
@@ -117,7 +117,7 @@ module.exports.routes = function(app,express){
   //admin 
   app.get('/write',function(req,res){
     if(isSession(req,res)){
-      conn.query('select name from user',function(err,rows,fields){
+      conn.query('select name from user where id = \'' + req.cookies.userid + '\'',function(err,rows,fields){
         if(err) throw err;
         res.render('admin/layout',{
           name:rows[0].name,
@@ -126,6 +126,26 @@ module.exports.routes = function(app,express){
         })
       })
     }
+  })
+
+  //mylist 
+  app.get('/mylist',function(req,res){
+    var _title = '博客视界-文章列表';
+    conn.query('SELECT * FROM article where autherid =\'' + req.cookies.userid + '\' order by id desc limit 0,10', function(err, rows, fields) {
+    if (err) throw err;
+      var article = forTimearry(rows);
+      var introduction = delHtmlTag(article);
+      conn.query('SELECT name FROM user', function(err, rows, fields) {
+      if (err) throw err;
+        res.render('admin/layout',{
+          article:article,
+          introduction:introduction,
+          name:rows[0].name,
+          title:_title,
+          flag:'list'
+        })
+      });
+    });
   })
 
     //bglist 
@@ -149,11 +169,9 @@ module.exports.routes = function(app,express){
   //接受并且返回发表文章内容
   app.post('/createarticle',function(req,res){
     var date = new Date().Format("yyyy-MM-dd hh:mm:ss");
-    console.log(req.body.title);
-    console.log(req.body.writer);
-    console.log(req.body.content);
-    console.log(date);
-    conn.query('insert into article (`title`, `auther`, `article`, `createtime`, `deleteflag`) VALUES ( \'' + req.body.title + '\', \'' + req.body.writer + '\', \'' + req.body.content + '\', \'' + date + '\', 1)',function(err,result){
+     conn.query('SELECT * FROM article order by id desc limit 0,10', function(err, rows, fields) {
+        if (err) throw err;
+     conn.query('insert into article (`title`, `auther`, `article`, `createtime`, `deleteflag`, `autherid`) VALUES ( \'' + req.body.title + '\', \'' + req.body.writer + '\', \'' + req.body.content + '\', \'' + date + '\', 1, \'' + req.cookies.userid + '\')',function(err,result){
       if(err){
         res.send({success:false});
         return;
@@ -162,6 +180,7 @@ module.exports.routes = function(app,express){
         return;
       }
     });
+   });
   });
 }
 
@@ -251,8 +270,7 @@ function delHtmlTag(str)
 function isSession(req,res){
   // 如果请求中的 cookie 存在 isVisit, 则输出 cookie
   // 否则，设置 cookie 字段 isVisit, 并设置过期时间为1分钟
-  if (req.cookies.isVisit) {
-    console.log(req.cookies);
+  if (req.cookies.userid) {
     return true;
   } else {
     res.render('login',{});

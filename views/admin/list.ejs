@@ -1,8 +1,12 @@
     <div class="blogcont">
       <ul>
         <% for(var i=0;i<article.length;i++){ %>
-        <li class="ad_li_list">
-          <a class="ad_list" href="/article?id=<%=article[i].id%>"><%=article[i].title%></a>
+        <li class="list">
+          <a class="blog_title" href="/article?id=<%=article[i].id%>"><%=article[i].title%></a>
+          <p class="brief"><%-introduction[i].article.substr(0,200)%>......</p>
+          <div style="overflow:hidden;">
+            <span style="float:left;">作者:&nbsp;&nbsp;<%=article[i].auther%></span><span style="float:right;"><%=article[i].createtime%></span>
+          </div>
         </li>
         <% } %>
       </ul>
