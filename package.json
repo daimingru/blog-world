@@ -1,0 +1,45 @@
+{
+  "name": "blog-world",
+  "version": "1.0.1",
+  "description": "基于node + express + mysql 个人博客",
+  "main": "app.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.1",
+    "body-parser": "^1.15.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.3",
+    "moment": "^2.11.2",
+    "mysql": "^2.10.2",
+    "ueditor": "^1.1.1",
+    "node-mysql": "^0.4.2"
+  },
+  "devDependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.3",
+    "express": "^4.14.0",
+    "moment": "^2.17.0",
+    "mysql": "^2.12.0",
+    "node-mysql": "^0.4.2",
+    "ueditor": "^1.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daimingru/blog-world.git"
+  },
+  "keywords": [
+    "博客视界，个人博客，博客世界"
+  ],
+  "author": "daimingru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daimingru/blog-world/issues"
+  },
+  "homepage": "https://github.com/daimingru/blog-world#readme"
+}
