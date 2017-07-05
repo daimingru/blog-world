@@ -44,6 +44,6 @@ app.get('/',function(req,res){
     res.send(echostr);
 });
 
-app.get('/inedx',function(req,res){
+app.get('/index',function(req,res){
     res.send('成功啦！');
 });
