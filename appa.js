@@ -4,6 +4,11 @@ var bodyParser = require("body-parser")
 var app = express()
 app.listen(port)
 app.use(bodyParser.urlencoded({ extended: false }))
+
 app.post('/',function(req,res){  
-  res.end(req.body);  
-});  
+  res.end(req.body)
+})  
+
+app.get('/',function(req,res){
+    res.end(req.body)
+})
