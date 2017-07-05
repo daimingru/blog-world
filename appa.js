@@ -6,7 +6,7 @@ app.listen(port)
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.post('/',function(req,res){  
-  res.end(req.body)
+  res.send({success:false})
 })  
 
 app.get('/',function(req,res){
