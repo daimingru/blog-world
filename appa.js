@@ -45,5 +45,7 @@ app.get('/',function(req,res){
 });
 
 app.get('/index',function(req,res){
-    res.send('成功啦！');
+    var return_uri = 'http%3A%2F%2Fwww.aparesse.com%2Findex'
+    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf114c69f6437bf60&redirect_uri='+return_uri+'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+     res.redirect(url);
 });
