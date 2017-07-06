@@ -22,7 +22,9 @@ app.get('/',function(req,res){
 
     //3.将三个参数字符串拼接成一个字符串进行sha1加密
     var tempStr = array.join('');
+
     const hashCode = crypto.createHash('sha1'); //创建加密类型 
+
     var resultCode = hashCode.update(tempStr,'utf8').digest('hex'); //对传入的字符串进行加密
 
     res.send(echostr);
@@ -38,7 +40,6 @@ app.get('/index',function(req,res){
 
 app.get('/get_wx', function(req,res, next){
 
-    // 第二步：通过code换取网页授权access_token
     var code = req.query.code;
     request.get(
         {   
@@ -51,7 +52,9 @@ app.get('/get_wx', function(req,res, next){
                 var data = JSON.parse(body);
                 var access_token = data.access_token;
                 var openid = data.openid;
-                res.send('<div>' + decodeURIComponent(body) + '</div><div>' + body + '</div>');
+
+
+                res.send('<h2>获取成功</h2><div>' + decodeURIComponent(body) + '</div>');
                 
             }else{
                 console.log(response.statusCode);
