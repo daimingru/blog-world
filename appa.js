@@ -39,8 +39,10 @@ app.get('/index',function(req,res){
 });
 
 app.get('/get_wx', function(req,res, next){
-    res.send('<h2>获取成功</h2><div>' + JSON.stringify(req.query) + '</div>');
+    
     var code = req.query.code;
+    var state = req.query.state;
+    res.send('<h2>获取成功</h2><div>' + JSON.stringify(state) + '</div><div>' + code + '</div>');
     // request.get(
     //     {   
     //         url:'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf114c69f6437bf60&secret=cbce5967dc69e7922cd7161dd91e205f&code=' + code + '&grant_type=authorization_code',
