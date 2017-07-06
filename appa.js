@@ -33,7 +33,8 @@ app.get('/',function(req,res){
 app.get('/index',function(req,res){
 
     var return_uri = 'http%3A%2F%2Fwww.aparesse.com%2Fget_wx'
-    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf114c69f6437bf60&redirect_uri='+return_uri+'&response_type=code&scope=snsapi_userinfo&state=%5Bobject%20Object%5D#wechat_redirect';
+    var state = new Buffer('{"a":"1","b":"2"}').toString('base64');
+    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf114c69f6437bf60&redirect_uri='+return_uri+'&response_type=code&scope=snsapi_userinfo&state=' + state + '#wechat_redirect';
     res.redirect(url);
 
 });
@@ -42,7 +43,7 @@ app.get('/get_wx', function(req,res, next){
     
     var code = req.query.code;
     var state = req.query.state;
-    res.send('<h2>获取成功</h2><div>' + JSON.stringify(state) + '</div><div>' + code + '</div>');
+    res.send('<h2>获取成功</h2><div>' + new Buffer(state, 'base64').toString() + '</div><div>' + code + '</div>');
     // request.get(
     //     {   
     //         url:'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf114c69f6437bf60&secret=cbce5967dc69e7922cd7161dd91e205f&code=' + code + '&grant_type=authorization_code',
