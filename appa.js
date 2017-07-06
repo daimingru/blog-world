@@ -39,7 +39,7 @@ app.get('/index',function(req,res){
 });
 
 app.get('/get_wx', function(req,res, next){
-    res.send('<h2>获取成功</h2><div>' + decodeURIComponent(req.query) + '</div>');
+    res.send('<h2>获取成功</h2><div>' + JSON.stringify(req.query) + '</div>');
     var code = req.query.code;
     // request.get(
     //     {   
