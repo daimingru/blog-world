@@ -51,7 +51,7 @@ app.get('/get_wx', function(req,res, next){
                 var data = JSON.parse(body);
                 var access_token = data.access_token;
                 var openid = data.openid;
-                res.redirect(body);
+                res.send('<div>' + decodeURIComponent(body) + '</div><div>' + body + '</div>');
                 
             }else{
                 console.log(response.statusCode);
