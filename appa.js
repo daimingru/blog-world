@@ -33,33 +33,33 @@ app.get('/',function(req,res){
 app.get('/index',function(req,res){
 
     var return_uri = 'http%3A%2F%2Fwww.aparesse.com%2Fget_wx'
-    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf114c69f6437bf60&redirect_uri='+return_uri+'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf114c69f6437bf60&redirect_uri='+return_uri+'&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect';
     res.redirect(url);
 
 });
 
 app.get('/get_wx', function(req,res, next){
-
+    res.send('<h2>获取成功</h2><div>' + decodeURIComponent(req.query) + '</div>');
     var code = req.query.code;
-    request.get(
-        {   
-            url:'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf114c69f6437bf60&secret=cbce5967dc69e7922cd7161dd91e205f&code=' + code + '&grant_type=authorization_code',
-        },
-        function(error, response, body){
+    // request.get(
+    //     {   
+    //         url:'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf114c69f6437bf60&secret=cbce5967dc69e7922cd7161dd91e205f&code=' + code + '&grant_type=authorization_code',
+    //     },
+    //     function(error, response, body){
 
-            if(response.statusCode == 200){
+    //         if(response.statusCode == 200){
 
-                var data = JSON.parse(body);
-                var access_token = data.access_token;
-                var openid = data.openid;
+    //             var data = JSON.parse(body);
+    //             var access_token = data.access_token;
+    //             var openid = data.openid;
 
 
-                res.send('<h2>获取成功</h2><div>' + decodeURIComponent(body) + '</div>');
+    //             res.send('<h2>获取成功</h2><div>' + decodeURIComponent(body) + '</div>');
                 
-            }else{
-                console.log(response.statusCode);
-            }
+    //         }else{
+    //             console.log(response.statusCode);
+    //         }
 
-        }
-    );
+    //     }
+    // );
 });
