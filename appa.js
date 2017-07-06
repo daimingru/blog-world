@@ -1,6 +1,7 @@
 var express = require('express')
 var port = process.env.PORT || 80
 var bodyParser = require("body-parser")
+var request = require('request');  
 var crypto = require('crypto')
 var sha1 = require('sha1')
 var app = express()
@@ -28,16 +29,18 @@ app.get('/',function(req,res){
 });
 
 app.get('/index',function(req,res){
+
     var return_uri = 'http%3A%2F%2Fwww.aparesse.com%2Fget_wx'
     var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf114c69f6437bf60&redirect_uri='+return_uri+'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
     res.redirect(url);
+
 });
 
 app.get('/get_wx', function(req,res, next){
 
     // 第二步：通过code换取网页授权access_token
     var code = req.query.code;
-    app.get(
+    request.get(
         {   
             url:'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf114c69f6437bf60&secret=cbce5967dc69e7922cd7161dd91e205f&code=' + code + '&grant_type=authorization_code',
         },
