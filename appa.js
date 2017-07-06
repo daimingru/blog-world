@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 app.get('/',function(req,res){
+
     //1.获取微信服务器Get请求的参数 signature、timestamp、nonce、echostr
     var signature = req.query.signature,//微信加密签名
         timestamp = req.query.timestamp,//时间戳
@@ -28,7 +29,10 @@ app.get('/',function(req,res){
     var resultCode = hashCode.update(tempStr,'utf8').digest('hex'); //对传入的字符串进行加密
 
     res.send(echostr);
+
 });
+
+
 
 app.get('/index',function(req,res){
 
@@ -39,30 +43,30 @@ app.get('/index',function(req,res){
 
 });
 
+
 app.get('/get_wx', function(req,res, next){
     
     var code = req.query.code;
     var state = req.query.state;
-    res.send('<h2>获取成功</h2><div>' + new Buffer(state, 'base64').toString() + '</div><div>' + code + '</div>');
-    // request.get(
-    //     {   
-    //         url:'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf114c69f6437bf60&secret=cbce5967dc69e7922cd7161dd91e205f&code=' + code + '&grant_type=authorization_code',
-    //     },
-    //     function(error, response, body){
+    request.get(
+        {   
+            url:'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf114c69f6437bf60&secret=cbce5967dc69e7922cd7161dd91e205f&code=' + code + '&grant_type=authorization_code',
+        },
+        function(error, response, body){
 
-    //         if(response.statusCode == 200){
+            if(response.statusCode == 200){
 
-    //             var data = JSON.parse(body);
-    //             var access_token = data.access_token;
-    //             var openid = data.openid;
+                var data = JSON.parse(body);
+                var access_token = data.access_token;
+                var openid = data.openid;
 
 
-    //             res.send('<h2>获取成功</h2><div>' + decodeURIComponent(body) + '</div>');
+                res.send('<h2>获取成功</h2><div>' + decodeURIComponent(body) + '</div>');
                 
-    //         }else{
-    //             console.log(response.statusCode);
-    //         }
+            }else{
+                console.log(response.statusCode);
+            }
 
-    //     }
-    // );
+        }
+    );
 });
