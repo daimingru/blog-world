@@ -45,7 +45,8 @@ app.get('/wger',function(req,res){
 
 //用户在app中点击对应卡片的路由
 
-app.get('/index?id=1',function(req,res){
+app.get('/index',function(req,res){
+    console.log(123123);
     var sserver = 'bac2c7e9a1e741f4f704b57f021a77ff';
     var return_uri = 'http%3A%2F%2Fwww.aparesse.com%2Fget_wx'  // encode后的URL地址， 用户确认授权后悔跳转到这个页面  需要加http://
     var state = new Buffer('{"a":"1","b":"2"}').toString('base64'); //  跳转到上面URL 地址后  携带的参数     参数格式为  {"":""}
