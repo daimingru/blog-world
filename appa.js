@@ -46,10 +46,10 @@ app.get('/wger',function(req,res){
 //用户在app中点击对应卡片的路由
 
 app.get('/index?id=1',function(req,res){
-
+    var sserver = 'bac2c7e9a1e741f4f704b57f021a77ff';
     var return_uri = 'http%3A%2F%2Fwww.aparesse.com%2Fget_wx'  // encode后的URL地址， 用户确认授权后悔跳转到这个页面  需要加http://
     var state = new Buffer('{"a":"1","b":"2"}').toString('base64'); //  跳转到上面URL 地址后  携带的参数     参数格式为  {"":""}
-    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf114c69f6437bf60&redirect_uri='+return_uri+'&response_type=code&scope=snsapi_userinfo&state=' + state + '#wechat_redirect';
+    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8a31e925f0d584e9&redirect_uri='+return_uri+'&response_type=code&scope=snsapi_userinfo&state=' + state + '#wechat_redirect';
     res.redirect(url); //重定向到微信授权页面
 
 });
@@ -65,7 +65,7 @@ app.get('/get_wx', function(req,res, next){
     //发送请求使用code换取oppenid
     request.get(
         {   
-            url:'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf114c69f6437bf60&secret=cbce5967dc69e7922cd7161dd91e205f&code=' + code + '&grant_type=authorization_code',
+            url:'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx8a31e925f0d584e9&secret=cbce5967dc69e7922cd7161dd91e205f&code=' + code + '&grant_type=authorization_code',
         },
         function(error, response, body){
             //完成请求后微信返回的statusCode == 200 证明授权成功
