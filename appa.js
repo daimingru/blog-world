@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //微信配置接口，用于接受页面绑定域名是微信验证服务器是否正确的接口
 
 app.get('/wger',function(req,res){
-
+    console.log(req.query);
     //1.获取微信服务器Get请求的参数 signature、timestamp、nonce、echostr
     var signature = req.query.signature,//微信加密签名
         timestamp = req.query.timestamp,//时间戳
