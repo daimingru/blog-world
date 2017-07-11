@@ -50,6 +50,7 @@ app.get('/index',function(req,res){
     var return_uri = 'http%3A%2F%2Fwww.aparesse.com%2Fget_wx'  // encode后的URL地址， 用户确认授权后悔跳转到这个页面  需要加http://
     var state = new Buffer('{"a":"1","b":"2"}').toString('base64'); //  跳转到上面URL 地址后  携带的参数     参数格式为  {"":""}
     var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2cdc8a781ed4dc08&redirect_uri='+return_uri+'&response_type=code&scope=snsapi_userinfo&state=' + state + '#wechat_redirect';
+    console.log(url);
     res.redirect(url); //重定向到微信授权页面
 
 });
