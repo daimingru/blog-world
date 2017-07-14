@@ -53,7 +53,7 @@ app.get('/index',function(req,res){
     // console.log(url);
     // res.redirect(url); //重定向到微信授权页面
 
-    res.sendfile('index.html');
+    res.sendfile('dist/index.html');
 
 });
 
